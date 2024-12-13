@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particles Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000; /* Fondo negro */
+        }
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <script>
+        tsParticles.load("particles-js", {
+            particles: {
+                number: { value: 100 },
+                color: { value: "#ffffff" },
+                size: { value: 10 },
+                move: { enable: true, speed: 5 },
+            },
+            background: {
+                color: { value: "#000000" },
+            },
+        });
+    </script>
+</body>
+</html>

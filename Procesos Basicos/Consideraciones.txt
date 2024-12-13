@@ -1,0 +1,474 @@
+Para los articulos ---->
+---------------------------------------------------------------------
+1.Obtener productos de Sage 200: Obtén los productos que deseas sincronizar desde Sage 200. Esto dependerá de cómo accedes a los datos en Sage (normalmente con una base de datos interna o API).
+
+2.Autenticación en la API de Shopify: Para interactuar con la API de Shopify necesitas una clave de acceso API y una clave secreta (debes generarlas en el panel de Shopify bajo "Apps" -> "Manage private apps").
+
+3.Crear o actualizar productos en Shopify:
+        - Para crear un producto, envía una solicitud POST al endpoint /admin/api/2023-10/products.json con los detalles del producto.
+        - Para actualizar un producto existente, usa una solicitud PUT al endpoint /admin/api/2023-10/products/{product_id}.json proporcionando el product_id del producto que deseas actualizar.
+
+----------------------------------------------------------------------------------------
+
+
+
+Para los clientes <---->
+-----------------------------------------------------------------------------------------
+
+1.Obtener clientes registrados en Shopify:
+    Usa el endpoint /admin/api/2023-10/customers.json para obtener la lista de clientes.
+
+2.Registrar clientes en Sage 200:
+    Aquí necesitarás una lógica para crear el cliente en Sage 200 mediante su API o base de datos.
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+Para instalar biblioteca
+-------------------------------------------------------------
+python -m pip install ShopifyAPI
+-------------------------------------------------------------
+
+
+
+Para los pedidos <-----
+------------------------------------------------------------------------------------------------------
+
+1.Obtener pedidos de Shopify:
+    Utiliza el endpoint /admin/api/2023-10/orders.json para obtener los pedidos de Shopify.
+
+
+2.Registrar pedidos en Sage 200:
+    Procesa los pedidos en Sage 200, asegurándote de mapear correctamente los datos de la orden, los detalles del cliente, los productos y el método de pago.
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+API DE SHOPIFY 
+---------------------------------------------------------
+Crear un producto: POST /admin/api/2023-10/products.json
+Actualizar un producto: PUT /admin/api/2023-10/products/{product_id}.json
+Eliminar un producto: DELETE /admin/api/2023-10/products/{product_id}.json
+
+Obtener clientes: GET /admin/api/2023-10/customers.json
+Obtener un cliente específico: GET /admin/api/2023-10/customers/{customer_id}.json
+
+
+Obtener pedidos: GET /admin/api/2023-10/orders.json
+Obtener un pedido específico: GET /admin/api/2023-10/orders/{order_id}.json
+---------------------------------------------------------------
+
+
+
+
+
+
+DATOS API 
+-------------------------------------------------------------------------
+token de acceso API shopify : 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
+
+clave api : c31c94fac98663b7464f27611e9fe0a3
+
+Clave secreta : d2fc14641acc83f2d92b88baf2506648
+--------------------------------------------------------------------------
+
+
+Ejemplo de JSON de Clientes : 
+---------------------------------------------------------------------------------
+{
+    "id": 8406927573335,
+    "created_at": "2024-10-23T16:34:20+02:00",
+    "updated_at": "2024-10-23T16:34:20+02:00",
+    "orders_count": 0,
+    "state": "disabled",
+    "total_spent": "0.00",
+    "last_order_id": null,
+    "note": null,
+    "verified_email": true,
+    "multipass_identifier": null,
+    "tax_exempt": false,
+    "tags": "",
+    "last_order_name": null,
+    "currency": "EUR",
+    "addresses": [
+        {
+            "id": 10662985367895,
+            "customer_id": 8406927573335,
+            "company": null,
+            "province": "Madrid",
+            "country": "Spain",
+            "province_code": "M",
+            "country_code": "ES",
+            "country_name": "Spain",
+            "default": true
+        }
+    ],
+    "tax_exemptions": [],
+    "email_marketing_consent": {
+        "state": "not_subscribed",
+        "opt_in_level": "single_opt_in",
+        "consent_updated_at": null
+    },
+    "sms_marketing_consent": {
+        "state": "not_subscribed",
+        "opt_in_level": "single_opt_in",
+        "consent_updated_from": "OTHER"
+    },
+    "admin_graphql_api_id": "gid://shopify/Customer/8406927573335",
+    "default_address": {
+        "id": 10662985367895,
+        "customer_id": 8406927573335,
+        "company": null,
+        "province": "Madrid",
+        "country": "Spain",
+        "province_code": "M",
+        "country_code": "ES",
+        "country_name": "Spain",
+        "default": true
+    }
+}
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+Ejemplo json Variantes
+---------------------------------------------------------------------------------
+{
+    "id": 49340439986519,
+    "product_id": 9650239471959,
+    "title": "Verde / M",
+    "price": "49.99",
+    "position": 6,
+    "inventory_policy": "deny",
+    "compare_at_price": null,
+    "option1": "Verde",
+    "option2": "M",
+    "option3": null,
+    "created_at": "2024-10-23T17:14:51+02:00",
+    "updated_at": "2024-10-23T17:14:51+02:00",
+    "taxable": true,
+    "barcode": null,
+    "fulfillment_service": "manual",
+    "grams": 0,
+    "inventory_management": "shopify",
+    "requires_shipping": true,
+    "sku": "CHAQUETA-VERDE-M",
+    "weight": 0.0,
+    "weight_unit": "kg",
+    "inventory_item_id": 51386240106839,
+    "inventory_quantity": 0,
+    "old_inventory_quantity": 0,
+    "admin_graphql_api_id": "gid://shopify/ProductVariant/49340439986519",
+    "image_id": null
+}
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+Ejemplo JSON Articulo (Completo)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    "id": 9650844205399,
+    "title": "Chaqueta de Invierno",
+    "body_html": "<strong>Chaqueta acolchada ideal para el invierno.</strong>",
+    "vendor": "Moda Invierno",
+    "product_type": "Chaquetas",
+    "created_at": "2024-10-23T17:19:58+02:00",
+    "handle": "chaqueta-de-invierno-1",
+    "updated_at": "2024-10-23T17:19:59+02:00",
+    "published_at": "2024-10-23T17:19:58+02:00",
+    "template_suffix": null,
+    "published_scope": "global",
+    "tags": "chaqueta, invierno, moda",
+    "status": "active",
+    "admin_graphql_api_id": "gid://shopify/Product/9650844205399",
+    "variants": [
+        {
+            "id": 49340471017815,
+            "product_id": 9650844205399,
+            "title": "Rojo / S",
+            "price": "49.99",
+            "position": 1,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "option1": "Rojo",
+            "option2": "S",
+            "option3": null,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "taxable": true,
+            "barcode": null,
+            "fulfillment_service": "manual",
+            "grams": 0,
+            "inventory_management": null,
+            "requires_shipping": true,
+            "sku": "CHAQUETA-ROJA-S",
+            "weight": 0.0,
+            "weight_unit": "kg",
+            "inventory_item_id": 51386271170903,
+            "inventory_quantity": 20,
+            "old_inventory_quantity": 20,
+            "admin_graphql_api_id": "gid://shopify/ProductVariant/49340471017815",
+            "image_id": null
+        },
+        {
+            "id": 49340471050583,
+            "product_id": 9650844205399,
+            "title": "Rojo / M",
+            "price": "49.99",
+            "position": 2,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "option1": "Rojo",
+            "option2": "M",
+            "option3": null,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "taxable": true,
+            "barcode": null,
+            "fulfillment_service": "manual",
+            "grams": 0,
+            "inventory_management": null,
+            "requires_shipping": true,
+            "sku": "CHAQUETA-ROJA-M",
+            "weight": 0.0,
+            "weight_unit": "kg",
+            "inventory_item_id": 51386271203671,
+            "inventory_quantity": 15,
+            "old_inventory_quantity": 15,
+            "admin_graphql_api_id": "gid://shopify/ProductVariant/49340471050583",
+            "image_id": null
+        },
+        {
+            "id": 49340471083351,
+            "product_id": 9650844205399,
+            "title": "Rojo / L",
+            "price": "49.99",
+            "position": 3,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "option1": "Rojo",
+            "option2": "L",
+            "option3": null,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "taxable": true,
+            "barcode": null,
+            "fulfillment_service": "manual",
+            "grams": 0,
+            "inventory_management": null,
+            "requires_shipping": true,
+            "sku": "CHAQUETA-ROJA-L",
+            "weight": 0.0,
+            "weight_unit": "kg",
+            "inventory_item_id": 51386271236439,
+            "inventory_quantity": 15,
+            "old_inventory_quantity": 15,
+            "admin_graphql_api_id": "gid://shopify/ProductVariant/49340471083351",
+            "image_id": null
+        },
+        {
+            "id": 49340471116119,
+            "product_id": 9650844205399,
+            "title": "Negro / L",
+            "price": "49.99",
+            "position": 4,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "option1": "Negro",
+            "option2": "L",
+            "option3": null,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "taxable": true,
+            "barcode": null,
+            "fulfillment_service": "manual",
+            "grams": 0,
+            "inventory_management": null,
+            "requires_shipping": true,
+            "sku": "CHAQUETA-NEGRA-L",
+            "weight": 0.0,
+            "weight_unit": "kg",
+            "inventory_item_id": 51386271269207,
+            "inventory_quantity": 10,
+            "old_inventory_quantity": 10,
+            "admin_graphql_api_id": "gid://shopify/ProductVariant/49340471116119",
+            "image_id": null
+        },
+        {
+            "id": 49340471148887,
+            "product_id": 9650844205399,
+            "title": "Rosa / M",
+            "price": "49.99",
+            "position": 5,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "option1": "Rosa",
+            "option2": "M",
+            "option3": null,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "taxable": true,
+            "barcode": null,
+            "fulfillment_service": "manual",
+            "grams": 0,
+            "inventory_management": null,
+            "requires_shipping": true,
+            "sku": "CHAQUETA-ROSA-M",
+            "weight": 0.0,
+            "weight_unit": "kg",
+            "inventory_item_id": 51386271301975,
+            "inventory_quantity": 5,
+            "old_inventory_quantity": 5,
+            "admin_graphql_api_id": "gid://shopify/ProductVariant/49340471148887",
+            "image_id": null
+        }
+    ],
+    "options": [
+        {
+            "id": 12236384895319,
+            "product_id": 9650844205399,
+            "name": "Color",
+            "position": 1,
+            "values": [
+                "Rojo",
+                "Negro",
+                "Rosa"
+            ]
+        },
+        {
+            "id": 12236384928087,
+            "product_id": 9650844205399,
+            "name": "Talla",
+            "position": 2,
+            "values": [
+                "S",
+                "M",
+                "L"
+            ]
+        }
+    ],
+    "images": [
+        {
+            "id": 59595000250711,
+            "alt": null,
+            "position": 1,
+            "product_id": 9650844205399,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "admin_graphql_api_id": "gid://shopify/ProductImage/59595000250711",
+            "width": 1250,
+            "height": 1625,
+            "src": "https://cdn.shopify.com/s/files/1/0867/5118/3191/files/61dORinHNsL_8d873c83-1ce5-4d0e-94e8-7b28c839a3c9.jpg?v=1729696799",
+            "variant_ids": []
+        },
+        {
+            "id": 59595000283479,
+            "alt": null,
+            "position": 2,
+            "product_id": 9650844205399,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "admin_graphql_api_id": "gid://shopify/ProductImage/59595000283479",
+            "width": 679,
+            "height": 901,
+            "src": "https://cdn.shopify.com/s/files/1/0867/5118/3191/files/51mVp1pc69L._AC_SX679_3cfeede7-0166-4463-afec-e4981f94e9b4.jpg?v=1729696799",
+            "variant_ids": []
+        },
+        {
+            "id": 59595000316247,
+            "alt": null,
+            "position": 3,
+            "product_id": 9650844205399,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "admin_graphql_api_id": "gid://shopify/ProductImage/59595000316247",
+            "width": 679,
+            "height": 902,
+            "src": "https://cdn.shopify.com/s/files/1/0867/5118/3191/files/519B4irw7OL._AC_SX679_0eb4cf55-1f4e-4847-b8bb-0083f9c33c2e.jpg?v=1729696799",
+            "variant_ids": []
+        },
+        {
+            "id": 59595000349015,
+            "alt": null,
+            "position": 4,
+            "product_id": 9650844205399,
+            "created_at": "2024-10-23T17:19:59+02:00",
+            "updated_at": "2024-10-23T17:19:59+02:00",
+            "admin_graphql_api_id": "gid://shopify/ProductImage/59595000349015",
+            "width": 569,
+            "height": 990,
+            "src": "https://cdn.shopify.com/s/files/1/0867/5118/3191/files/815Ga1enziL._AC_SX569_4c1ad19e-4f3c-4dd6-a0b0-4d7e951986a4.jpg?v=1729696799",
+            "variant_ids": []
+        }
+    ],
+    "image": {
+        "id": 59595000250711,
+        "alt": null,
+        "position": 1,
+        "product_id": 9650844205399,
+        "created_at": "2024-10-23T17:19:59+02:00",
+        "updated_at": "2024-10-23T17:19:59+02:00",
+        "admin_graphql_api_id": "gid://shopify/ProductImage/59595000250711",
+        "width": 1250,
+        "height": 1625,
+        "src": "https://cdn.shopify.com/s/files/1/0867/5118/3191/files/61dORinHNsL_8d873c83-1ce5-4d0e-94e8-7b28c839a3c9.jpg?v=1729696799",
+        "variant_ids": []
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Ejemplo JSON Colecciones (Smart / Automatica )
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+{
+  "smart_collection": {
+    "id": 641565163863,(Esto no se puede añadir manual , ya que shopify los crea con antelacion )
+    "handle": "ropa-de-hombre",
+    "title": "Ropa de Hombre",
+    "updated_at": "2024-10-23T17:34:48+02:00",
+    "body_html": null,
+    "published_at": "2024-10-23T17:34:47+02:00",
+    "sort_order": "best-selling",
+    "template_suffix": null,
+    "disjunctive": false,
+    "rules": [
+      {
+        "column": "tag",
+        "relation": "equals",
+        "condition": "Hombre"
+      }
+    ],
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/641565163863"
+  }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+camiseta roja : https://m.media-amazon.com/images/I/51mVp1pc69L._AC_SX679_.jpg
+camiseta negra : https://m.media-amazon.com/images/I/519B4irw7OL._AC_SX679_.jpg
+camiseta rosa : https://m.media-amazon.com/images/I/815Ga1enziL._AC_SX569_.jpg
+camiseta verde : https://m.media-amazon.com/images/I/71vFrglxgrL.jpg
